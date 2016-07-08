@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 // Напишите модуль, который экспортирует функцию с именем `consoleRec`.
 // Функция должна **рекурсивно** выводить элементы массива на экран.
@@ -14,16 +14,13 @@
 // рекурсивные
 // функции
 
-var arrRec = ['я', 'умею', 'писать', 'рекурсивные', 'функции'],
-    lengthRec = arrRec.length - 1,
-    zero = 0;
-
-consoleRec(arrRec, zero);
-
 function consoleRec(arr, num) {
+	var lengthRec = arr.length - 1;
 	var arr = arr;
 	var length = num;
 
 	console.log(arr[length]);
 	return length !== lengthRec ? consoleRec(arr, length + 1) : false;
 }
+
+module.exports = consoleRec;

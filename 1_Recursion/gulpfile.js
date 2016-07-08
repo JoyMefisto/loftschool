@@ -1,13 +1,29 @@
 var gulp = require('gulp'),
     browserSync = require('browser-sync'),
-	babel = require('gulp-babel');
+    browserify = require('browserify'),
+	babel = require('gulp-babel'),
+	gutil = require('gulp-util'),
+    rename = require('gulp-rename'),
+	sourse = require('vinyl-source-stream');
+
+gulp.task('browserify', function() {
+
+	return browserify('js/main.js')
+		.bundle()
+		.on('error', function(e) {
+			gutil.log(e);
+		})
+		.pipe(sourse('bundle.js'))
+		.pipe(gulp.dest('./js'));
+});
  
-gulp.task('jsES6', function() {
-	return gulp.src('ES6/*.js')
+gulp.task('js', function() {
+	return gulp.src('./js/es6.js')
 		.pipe(babel({
 			presets: ['es2015']
 		}))
-		.pipe(gulp.dest('ES5'))
+		.pipe(rename('es5.js'))
+		.pipe(gulp.dest('js'))
     	.pipe(browserSync.reload({stream: true}));
 });
 
@@ -20,7 +36,7 @@ gulp.task('browser-sync', function() {
 	});
 });
 
-gulp.task('watch', ['jsES6','browser-sync'], function() {
+gulp.task('watch', ['js','browser-sync' ,'browserify'], function() {
   gulp.watch('./*.html', browserSync.reload);
-  gulp.watch('ES6/*.js', ['jsES6']);
+  gulp.watch('js/*.js', ['js', 'browserify']);
 });
