@@ -29,13 +29,15 @@ function isSomeTrue(source, filterFn) {
 
 function isNoNumber (arr){
     let array = arr,
+        i,
         isNum = false;
 
-    array.forEach(function(item) {
-        if(typeof item === 'number'){
+    for(i = 0; i < array.length; i++){
+        if(typeof array[i] === 'number'){
             isNum = true;
         }
-    });
+    }
+    
     return isNum;
 }
 

@@ -2,11 +2,10 @@
  * Created by Mefisto on 09.07.2016.
  */
 
-console.group('ДЗ №3');
+function calculator(firstNumber) {
+    this.firstNumber = firstNumber;
 
+    console.log(firstNumber);
+}
 
-
-
-
-
-console.groupEnd('ДЗ №3');
+var myCalculator = calculator(100);

@@ -31,7 +31,6 @@ function isAllTrue(source, filterFn) {
 
 function isNumber (arr){
     let array = arr,
-        i,
         isNum = true;
 
     array.forEach(function(item) {
