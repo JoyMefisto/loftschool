@@ -43,7 +43,9 @@ var calculator = (function(firstNumber) {
 
 var myCalculator = calculator(100);
 
+console.log('Третье ДЗ >>>');
 console.log(myCalculator.sum(1, 2, 3)); //вернет 106
 console.log(myCalculator.dif(10, 20)); //вернет 70
 console.log(myCalculator.div(2, 2)); //вернет 25
 console.log(myCalculator.mul(2, 2)); //вернет 400
+console.log('Третье ДЗ <<<');
