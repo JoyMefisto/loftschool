@@ -14,30 +14,34 @@ function isAllTrue(source, filterFn) {
             throw new Error('Зачем мне пустой массив?');
         }
 
-        return filterFn(source);
+        let i, boolFilterFn = true;
+        for(i = 0; i < source.length; i++){
+            if(!filterFn(source[i])){
+                boolFilterFn = false;
+            };
+        }
+        return boolFilterFn;
 
     }catch(e){
         console.error(e.message);
     }
 }
 
-function isNumber (arr){
-    let array = arr,
+function isNumber (item){
+    let num = item,
         isNum = true;
 
-    array.forEach(function(item) {
-        if(typeof item !== 'number'){
-            isNum = false;
-        }
-    });
+    if(typeof num !== 'number'){
+        isNum = false;
+    }
     return isNum;
 }
 
-// console.log('Первое ДЗ >>>');
-// console.log(isAllTrue(arrAllNumbers, isNumber));
-// console.log(isAllTrue(arrSomeNumbers, isNumber));
-// console.log(isAllTrue(arrNoNumbers, isNumber));
+console.log('Первое ДЗ >>>');
+console.log(isAllTrue(arrAllNumbers, isNumber));
+console.log(isAllTrue(arrSomeNumbers, isNumber));
+console.log(isAllTrue(arrNoNumbers, isNumber));
 console.log(isAllTrue(['',,], isNumber));
-// console.log(isAllTrue([], isNumber));
-// console.log('Первое ДЗ <<<');
+console.log(isAllTrue([], isNumber));
+console.log('Первое ДЗ <<<');
 

@@ -14,30 +14,26 @@ function isSomeTrue(source, filterFn) {
             throw new Error('Зачем мне пустой массив?');
         }
 
-        for(var i = 0; i < source.length; i++){
-            if(source[i] === undefined){
-                throw new Error('Невидимые значения? Это что-то новенькое.');
-            }
+        let i, boolFilterFn = false;
+        for(i = 0; i < source.length; i++){
+            if(!filterFn(source[i])){
+                boolFilterFn = true;
+            };
         }
-
-        return filterFn(source);
+        return boolFilterFn;
 
     }catch(e){
         console.error(e.message);
     }
 }
 
-function isNoNumber (arr){
-    let array = arr,
-        i,
+function isNoNumber (item){
+    let num = item,
         isNum = false;
 
-    for(i = 0; i < array.length; i++){
-        if(typeof array[i] === 'number'){
-            isNum = true;
-        }
+    if(typeof num !== 'number'){
+        isNum = true;
     }
-    
     return isNum;
 }
 
