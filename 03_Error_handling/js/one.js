@@ -33,11 +33,11 @@ function isNumber (arr){
     return isNum;
 }
 
-console.log('Первое ДЗ >>>');
-console.log(isAllTrue(arrAllNumbers, isNumber));
-console.log(isAllTrue(arrSomeNumbers, isNumber));
-console.log(isAllTrue(arrNoNumbers, isNumber));
+// console.log('Первое ДЗ >>>');
+// console.log(isAllTrue(arrAllNumbers, isNumber));
+// console.log(isAllTrue(arrSomeNumbers, isNumber));
+// console.log(isAllTrue(arrNoNumbers, isNumber));
 console.log(isAllTrue(['',,], isNumber));
-console.log(isAllTrue([], isNumber));
-console.log('Первое ДЗ <<<');
+// console.log(isAllTrue([], isNumber));
+// console.log('Первое ДЗ <<<');
 
