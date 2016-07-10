@@ -1,4 +1,4 @@
-var consoleRec = require('./es6');
+var consoleRec = require('./es5');
 
 let arrRec = ['я', 'умею', 'писать', 'рекурсивные', 'функции'],
     zero = 0;
