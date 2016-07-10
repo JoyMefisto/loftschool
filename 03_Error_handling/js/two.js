@@ -17,7 +17,7 @@ function isSomeTrue(source, filterFn) {
         let i, boolFilterFn = false;
         for(i = 0; i < source.length; i++){
             if(!filterFn(source[i])){
-                boolFilterFn = true;
+                return boolFilterFn = true;
             };
         }
         return boolFilterFn;
@@ -29,12 +29,12 @@ function isSomeTrue(source, filterFn) {
 
 function isNoNumber (item){
     let num = item,
-        isNum = false;
+        isNotNum = false;
 
     if(typeof num !== 'number'){
-        isNum = true;
+        isNotNum = true;
     }
-    return isNum;
+    return isNotNum;
 }
 
 console.log('Второе ДЗ >>>');

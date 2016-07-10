@@ -17,7 +17,7 @@ function isAllTrue(source, filterFn) {
         let i, boolFilterFn = true;
         for(i = 0; i < source.length; i++){
             if(!filterFn(source[i])){
-                boolFilterFn = false;
+                return boolFilterFn = false;
             };
         }
         return boolFilterFn;
