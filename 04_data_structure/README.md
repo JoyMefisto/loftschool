@@ -1,3 +1,3 @@
-##### main.js - forEach, filter, map, slice, reduce, splice;
+##### main.js - переписать нативные методы для работы с массивами - forEach, filter, map, slice, reduce, splice;
 
 ##### obj.js - функция обрабатывающая два объекта на идентичность;
