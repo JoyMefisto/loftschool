@@ -4,9 +4,6 @@
 
 
 var objA = {
-    prop1: 'value1',
-    prop2: new Date('2016/02/10'),
-    prop5: 1000,
     prop4: {
         subProp1: 'sub value1',
         subProp2: {
@@ -14,8 +11,14 @@ var objA = {
             subSubProp2: [1, 2, {prop2: 1, prop: 2}, 4, 5]
         }
     },
+    prop1: 'value1',
+    prop2: new Date('2016/02/10'),
+    prop5: 1000,
     prop6: 'value2',
-    prop3: 'value3'
+    prop3: 'value3',
+    prop7: (function(a,b){
+        let num = a + b;
+    })
 };
 
 var objB = {
@@ -30,14 +33,17 @@ var objB = {
             subSubProp2: [1, 2, {prop2: 1, prop: 2}, 4, 5]
         },
         subProp1: 'sub value1'
-    }
+    },
+    prop7: (function(a,b){
+        let num = a + b;
+    })
 };
 
 console.log(deepEqual(objA, objB)); //объекты идентичны, вернет true
 
 function deepEqual(obj1,obj2){
 
-    let concurrence = true,
+    let
         objA = obj1,
         objB = obj2;
 
@@ -45,32 +51,61 @@ function deepEqual(obj1,obj2){
         keysSecondObj = Object.keys(objB);
 
     if(keysFirstObj.length != keysSecondObj.length){
-        return concurrence = false;
+        return false;
     }
-
-    function getClass(obj) {
-        return {}.toString.call(obj).slice(8, -1);
-    }
-
 
     for(let prop in objA){
 
-        if( objA[prop].getTime){
-
-            let DateA = (objA[prop].valueOf()),
-                DateB = (objB[prop].valueOf());
-            
-            if( DateA !== DateB ){
-                return concurrence = false;
+        if(objA[prop] instanceof Object){
+            if(objA[prop] instanceof Date){
+                if(!inspectionDate(objA[prop], objB[prop])) return false;
+            } else if(objA[prop] instanceof Array){
+                if(!inspectionArray(objA[prop], objB[prop])) return false;
+            } else if(typeof objA[prop] === 'function'){
+                if(!inspectionFunc(objA[prop], objB[prop])) return false;
+            }else {
+                if(!deepEqual(objA[prop], objB[prop])) return false;
             }
 
-        } else if( objA[prop] instanceof Object || objA[prop] instanceof Array){
-            return deepEqual(objA[prop], objB[prop]);
-            
-        } else if(objA[prop].valueOf() !== objB[prop].valueOf()){
-            return concurrence = false;
+        } else {
+            if(objA[prop] !== objB[prop]) return false;
         }
     }
+    return true;
+}
 
-    return concurrence;
+function inspectionDate(d1,d2){
+    return (d2 instanceof Date) ? d1.valueOf() === d2.valueOf() : false;
+}
+
+function inspectionArray(array1, array2){
+    if(array2 instanceof Array){
+
+        for(let i = array1.length; i >= 0; i-- ){
+            if(array1[i] instanceof Object){
+                if(array1[i] instanceof Date){
+                    if(!inspectionDate(array1[i], array2[i])) return false;
+                } else if(array1[i] instanceof Array){
+                    if(!inspectionArray(array1[i], array2[i])) return false;
+                } else if(typeof array1[i] === 'function'){
+                    if(!inspectionFunc(array1[i], array2[i])) return false;
+                } else {
+                    if(!deepEqual(array1[i], array2[i])) return false;
+                }
+
+            } else {
+                if(array1[i] !== array2[i]) return false;
+            }
+        }
+
+        return true;
+    }
+
+}
+
+function inspectionFunc(func1, func2){
+    if(typeof func2 === 'function'){
+        if(func1.toString() !== func2.toString()) return false;
+    }
+    return true;
 }
