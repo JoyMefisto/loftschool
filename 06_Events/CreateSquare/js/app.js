@@ -28,8 +28,8 @@ function newSquare() {
 
     myDiv.style.width = sizeWH();
     myDiv.style.height = sizeWH();
-    myDiv.style.top = (Math.floor(Math.random()*document.body.scrollHeight))+ 'px';
-    myDiv.style.left = (Math.floor(Math.random()*document.body.clientWidth)) + 'px';
+    myDiv.style.top = (Math.floor(Math.random()*window.innerHeight))+ 'px';
+    myDiv.style.left = (Math.floor(Math.random()*window.innerWidth)) + 'px';
 
     document.body.appendChild(myDiv);
 
