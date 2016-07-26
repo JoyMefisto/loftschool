@@ -1,0 +1,31 @@
+.container_search {
+    margin-left: 0;
+    margin-top: 0;
+    padding: 20px;
+    width: 400px;
+}
+
+#list {
+    margin: 0;
+    padding: 0;
+    background: #f0f8ff;
+}
+
+.item {
+    list-style: none;
+    line-height: 30px;
+    border-bottom: 1px solid #dad7d7;
+}
+
+.link {
+    text-decoration: none;
+    width: 100%;
+    display: inline-block;
+    padding: 5px 15px;
+}
+
+.link:hover {
+    text-decoration: none;
+    background: #d5e4f0;
+    cursor: pointer;
+}
