@@ -1,0 +1,14 @@
+.container_table {
+    max-width: 500px;
+    display: inline-block;
+    width: 100%;
+    float: left;
+}
+
+.form_cookie {
+    max-width: 500px;
+    display: inline-block;
+    width: 100%;
+    margin-left: 100px;
+    float: left;
+}

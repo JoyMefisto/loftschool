@@ -1,0 +1,6 @@
+.container_table {
+    max-width: 500px;
+    display: inline-block;
+    width: 100%;
+    float: left;
+}
