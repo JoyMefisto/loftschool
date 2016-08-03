@@ -1,8 +1,7 @@
-renderSquareInMyWindow();
+searchCookieSquare('Square');
 
 let button = document.querySelector('button');
 let buttonSaveCookieMySquare = document.getElementById('Save_My_Square');
-let counterSquare = 0;
 
 button.addEventListener('click', newSquare);
 buttonSaveCookieMySquare.addEventListener('click', saveNewSquareInMyCookie);
@@ -71,43 +70,48 @@ function mDrag(myDiv){
 
 
 function saveNewSquareInMyCookie(){
-    counterSquare++;
-    let square = document.getElementById('my_div');
+    let styleNewSquare = document.getElementById('my_div').style.cssText;
+    let valueCookie = searchCookieSquare('Square') || "";
 
-    let squareBg = square.style.background;
-    let squareTop = square.style.top;
-    let squareLeft = square.style.left;
-    let squareWidth = square.style.width;
-    let squareHeight = square.style.height;
+    styleNewSquare = styleNewSquare.replace(/;/g, ".");
+    console.log(styleNewSquare);
 
-    document.cookie = "SquareNumber_"+counterSquare+"=background:"+squareBg+"| top:"+squareTop+"| left:"
-        +squareLeft+"| width:"+squareWidth+"| height:"+squareHeight+";";
+    document.cookie = "Square="+ valueCookie + "" + styleNewSquare+"|";
 
-    // console.log(document.cookie);
 }
 
-function renderSquareInMyWindow(){
+
+function searchCookieSquare(nameCookie){
     let allCookie = document.cookie.split("; ");
     let onlyMySquare = [];
 
-    let createMySquare = (arr) => {
-        let square = document.createElement('div');
-        square.style.position = 'absolute';
+    allCookie.forEach(function(elem){
+        if(!elem.indexOf(nameCookie)){
+            onlyMySquare[onlyMySquare.length] = elem.split("=");
+        }
+    });
+    
+    if(onlyMySquare.length){
+        renderSquareInMyWindow(onlyMySquare[0][1]);
+        return onlyMySquare[0][1];
+    }
+}
 
-        arr.forEach(function(item){
-            square.style.cssText += item;
-        });
+
+function renderSquareInMyWindow(string){
+    let createMySquare = (param) => {
+
+        let square = document.createElement('div');
+        // let newparam = param.replace(/./g, ";"); не работает, почему я хз :(
+        let newparam = param.split('.');
+        let newparam2 = newparam.join(";");
+
+        square.style.cssText = newparam2;
         document.body.appendChild(square);
     };
-
-    allCookie.forEach(function(elem){
-       if(!elem.indexOf('Square')){
-           onlyMySquare[onlyMySquare.length] = elem.split("=");
-       }
-    });
-
-    for(let elem of onlyMySquare){
-        let allParam = elem[1].split('|');
-        createMySquare(allParam);
+    
+    let allParam = string.split('|');
+    for(let elem of allParam){
+        createMySquare(elem);
     }
 }
