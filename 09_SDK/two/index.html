@@ -17,14 +17,16 @@
 
 <script id="template_el" type="text/x-handlebars-template">
     {{#each elems}}
-    <div>
+    <div class="block">
         <figure class="container__img">
             <img src="{{photo_100}}" alt="img">
         </figure>
         <article class="container__info">
             <h6>{{first_name}} {{last_name}}</h6>
-            <span>{{bdate}}</span>
-            <!--<span>?? лет</span>-->
+            <span>{{bdate}}</span><br>
+            {{#if year}}
+            <span>Возраст {{year}}</span>
+            {{/if}}
         </article>
     </div>
     {{/each}}

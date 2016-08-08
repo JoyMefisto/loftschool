@@ -46,41 +46,70 @@ new Promise(function(resolve){
             } else {
                 let obMyFriends = [];
                 let nowDate = new Date();
+
+// текущая дата
                 let myDate = {
                             day : nowDate.getDate(),
-                            month : nowDate.getMonth() + 1
+                            month : nowDate.getMonth() + 1,
+                            year : nowDate.getFullYear()
                             };
+
+// вычисляем возраст
+                function yearBDay(bdate) {
+                    if(!bdate) return "";
+
+                    let bDay = bdate.split('.');
+                    if(!bDay[2]) return "";
+                    else return myDate.year - bDay[2];
+                }
+
+// перебираем пришедшие данные
                 for(let item = 0; item < response.response.items.length; item++){
                     obMyFriends[obMyFriends.length] = { first_name : response.response.items[item].first_name,
                                                         last_name : response.response.items[item].last_name,
                                                         photo_100 : response.response.items[item].photo_100,
-                                                        bdate : response.response.items[item].bdate
+                                                        bdate : response.response.items[item].bdate,
+                                                        year : yearBDay(response.response.items[item].bdate)
                                                         }
                 }
 
-                let newObMyFriends = obMyFriends.filter(function(elem){
+                let noBDFriend = [];
+                let beforeBD = [];
+                let afterBD = [];
+
+// Сортируем по массивам тех людей у кого указано ДР и у кого нет
+                let yesBDFriends = obMyFriends.filter(function(elem){
                     if(elem.bdate !== undefined){
                         return elem;
+                    } else {
+                        noBDFriend[noBDFriend.length] = elem;
                     }
                 }).sort(function(a, b) {
+
                     let aDateArr = a.bdate.split('.');
                     let bDateArr = b.bdate.split('.');
-
 
                     if(parseInt(aDateArr[1]) > parseInt(bDateArr[1])) return 1;
                     else if(parseInt(aDateArr[1]) < parseInt(bDateArr[1])) return -1;
 
                     if(parseInt(aDateArr[0]) >= parseInt(bDateArr[0])) return 1;
                     else if(parseInt(aDateArr[0]) < parseInt(bDateArr[0])) return -1;
-
                 });
 
-                console.log(myDate);
+// Сортируем по массивам людей по ДР взависимости от текущей даты
+                yesBDFriends.map(function(elem){
+                    let bDate = elem.bdate.split('.');
+                    if(bDate[1] > myDate.month) return afterBD[afterBD.length] = elem;
+                    else if(bDate[1] < myDate.month) return beforeBD[beforeBD.length] = elem;
 
+                    if(bDate[0] >= myDate.day) return afterBD[afterBD.length] = elem;
+                    else if(bDate[0] < myDate.day) return beforeBD[beforeBD.length] = elem;
+                });
 
+// передаём и конкатенируем массивы в шаблон
                 let source = template_el.innerHTML;
                 let templateFn = Handlebars.compile(source);
-                let template = templateFn({ elems: newObMyFriends});
+                let template = templateFn({ elems: [].concat(afterBD, beforeBD, noBDFriend)});
                 friends.innerHTML = template;
 
                 resolve();
@@ -91,12 +120,4 @@ new Promise(function(resolve){
     console.log('Ошибка: ' + e.message);
 });
 // убить авторизацию в браузере VK.Auth.revokeGrants();
-
-
-// используем шаблонизатор Handlebars
-// let source = template_el.innerHTML;
-// let templateFn = Handlebars.compile(source);
-// let template = templateFn({ elems: arrElems});
-//
-// list.innerHTML = template;
 

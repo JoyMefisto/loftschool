@@ -5,3 +5,8 @@
 .container__info {
     display: inline-block;
 }
+
+.block {
+    display: inline-block;
+    width: 250px;
+}
