@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>Friends Filter</title>
+
+	<!-- build:css fonts/fonts.css -->
+	<link href="fonts/firasans/firasans.css" rel="stylesheet">
+	<link href="fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+	<link href="fonts/nexa/nexa.css" rel="stylesheet">
+	<!-- endbuild -->
+	<!-- build:css css/main.css -->
+	<link href="css/main.css" rel="stylesheet">
+	<!-- endbuild -->
+	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+    <script src="http://vk.com/js/api/openapi.js" type="text/javascript"></script>
+
+</head>
+<body>
+	<div class="app__container">
+		
+		<section class="app__modal">
+			<header class="app__header">
+				<h4 class="title">Выберите друзей</h4>
+				<!-- <i class="fa fa-times icon"></i> -->
+				<i class="fa fa-close icon" data-move="friend" aria-hidden="true"></i>
+			</header>
+			<main class="app__search clearfix">
+				<div class="app__search_element">
+					<i class="fa fa-search icon"></i>
+					<input type="text" class="search" placeholder="Начните вводить имя друга" data-search="friend_next">
+				</div>
+				<div class="app__search_element">
+					<i class="fa fa-search icon"></i>
+					<input type="text" class="search" placeholder="Начните вводить имя друга" data-search="friend_back">
+				</div>
+			</main>
+			<main class="app__main clearfix" id="js-container__friends">
+
+				<aside class="app__main_block">
+					<h5 class="app__main_title">Ваши друзья</h5>
+					<ul class="app__main_list" ondrop="drop(event)" ondragover="allowDrop(event)" id="friends__all_list" data-list="friends_next"></ul>
+				</aside>
+
+				<aside class="app__main_block">
+					<h5 class="app__main_title">Друзья в списке</h5>
+					<ul class="app__main_list close" ondrop="drop(event)" ondragover="allowDrop(event)" id="friends__list" data-list="friends_back"></ul>
+				</aside>
+
+			</main>
+			<a href="javascript:void(0);" class="save" id="saveFriend">Сохранить</a>
+		</section>
+	
+	</div>
+
+	<style id="search__all_friends">
+
+		#friends__all_list li:not([data-name*=]{
+			display:none;
+		}
+		
+	</style>
+
+	<style id="search__list_friends">
+
+		#friends__list li:not([data-name*=]{
+			display:none;
+		}
+		
+	</style>
+	
+	<script id="template_el" type="text/x-handlebars-template">
+	    {{#each elems}}
+	    
+	    <li class="elem" id="{{ @index }}all" draggable="true" ondragstart="drag(event)" data-move="item" data-name="{{tolowercase first_name}} {{tolowercase last_name}}">
+			<div class="img_container">
+				<img src="{{photo_50}}" alt="" class="img">
+			</div>
+			<div class="info">
+				<span class="info_name">{{first_name}} {{last_name}}</span>
+				<i class="fa fa-close icon" data-move="friend"></i>
+			</div>
+		</li>
+
+	    {{/each}}
+
+	</script>
+
+	<script id="template_checked" type="text/x-handlebars-template">
+
+	    {{#each elems}}
+	    
+	    <li class="elem" id="{{ @index }}checked" draggable="true" ondragstart="drag(event)" data-move="item" data-name="{{tolowercase first_name}} {{tolowercase last_name}}">
+			<div class="img_container">
+				<img src="{{photo_50}}" alt="" class="img">
+			</div>
+			<div class="info">
+				<span class="info_name">{{first_name}} {{last_name}}</span>
+				<i class="fa fa-close icon" data-move="friend"></i>
+			</div>
+		</li>
+
+	    {{/each}}
+
+	</script>
+
+
+
+	<!-- build:js js/bundle.js -->
+	<script src="js/es5/drag&drop.js"></script>
+	<script type="text/javascript" src="js/es5/api.js"></script>
+	<!-- endbuild -->
+
+</body>
+</html>

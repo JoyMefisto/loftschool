@@ -34,6 +34,8 @@ function newSquare() {
     document.body.appendChild(myDiv);
 
     mDrag(myDiv);
+     console.log(myDiv);
+
 }
 
 function mDrag(myDiv){
@@ -46,9 +48,11 @@ function mDrag(myDiv){
         offsetX = e.offsetX;
         offsetY = e.offsetY;
     };
+
     let mUp = (e) => {
         activeElement = null;
     };
+
     let mMove = (e) => {
         if(activeElement){
             activeElement.style.top = (e.clientY - offsetY)+ 'px';

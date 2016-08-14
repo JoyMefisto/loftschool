@@ -1,0 +1,170 @@
+.app {
+
+	&__container {
+		position: relative;
+		width: 100%;
+		height: 100%;
+	}
+
+
+	&__modal {
+		width: 620px;
+		height: 490px;
+		background: @bgModal;
+		margin: auto auto;
+		position: absolute;
+		top: calc(~'50% - 245px');
+		left: calc(~'50% - 310px');
+		border-radius: 10px;
+		overflow: hidden;
+
+		& .save {
+			background: @orange;
+			color: @white;
+			padding: 4pt 10pt;
+			border-radius: 5pt;
+			font-size: 9pt;
+			font-weight: 200;
+			text-decoration: none;
+			position: absolute;
+			right: 5pt;
+			bottom: 5pt;
+		}
+	}
+
+	&__header {
+		min-height: 45px;
+		background: @orange;
+		position: relative;
+
+		& .title {
+			font-size: 12pt;
+			font-weight: 400;
+			color: @white;
+			line-height: 34pt;
+			margin-left: 14px;
+		}
+
+		& .icon {
+			position: absolute;
+			right: 14px;
+			top: calc(~'50% - 7px');
+			font-size: 14pt;
+			color: @white;
+		}
+	}
+
+	&__search {
+		display: block;
+	    padding: 0 10px;
+
+		&_element {
+			float: left;
+			width: 50%;
+		    text-align: center;
+		    padding: 10px;
+		    position: relative;
+			
+			& .search {
+				width: 100%;
+				text-align: left;
+				border: none;
+				border-radius: 15px;
+				padding-left: 30px;
+				outline: none;
+				height: 20pt;
+				font-size: 9pt;
+			}
+
+			& .icon {
+				position: absolute;
+				top: 14px;
+				left: 17px;
+				color: @colorSearchIcon;
+			}
+		}
+	}
+	
+	&__main {
+		display: block;
+		background: @white;
+		padding: 0 10px;
+		position: relative;
+		margin-bottom: 10pt;
+		
+
+		&_block {
+			float: left;
+			width: 50%;
+			padding: 10px 10px 0 15px;
+		}
+
+		&_block:first-child {
+			padding-left: 10px;
+			border-right: 1px solid @bgModal;
+		}
+
+		&_title {
+			color: @colorText;
+			font-weight: 500;
+    		font-size: 10pt;
+			border-bottom: 1px solid @bgModal;
+		}
+
+		&_list {
+			list-style: none;
+			height: 325px;
+			overflow: auto;
+
+			& .elem {
+				display: block;
+				border-bottom: 1px solid @bgModal;
+				padding: 3px 0;
+				position: relative;
+				height: 58px;
+
+				& .img_container {
+					width: 50px;
+					height: 50px;
+					display: inline-block;
+					border-radius: 50%;
+					overflow: hidden;
+				}	
+
+				& .info {
+					display: inline-block;
+					position: absolute;
+					top: calc(~"50% - 11px");
+					left: 60px;
+					right: 0;
+					color: @colorText;
+
+					&_name {
+						font-size: 10pt;
+						font-weight: 500;
+						line-height: 10pt;
+					}
+
+					& .icon {
+					    position: absolute;
+					    right: 5px;
+					    font-size: 14pt;
+					    color: @addIcon;
+					    transform: rotate(45deg);
+					    cursor: pointer;
+
+					    &.close {
+					    	transform: rotate(0deg);
+					    }
+					}
+				}
+				
+			}
+
+			&.close .icon {
+		    	transform: rotate(0deg) !important;
+		    }
+			
+		}
+	}
+}
