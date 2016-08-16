@@ -64,27 +64,33 @@ new Promise(function(resolve){
                 }
 
 // перебираем пришедшие данные
-                for(let item = 0; item < response.response.items.length; item++){
-                    obMyFriends[obMyFriends.length] = { first_name : response.response.items[item].first_name,
-                                                        last_name : response.response.items[item].last_name,
-                                                        photo_100 : response.response.items[item].photo_100,
-                                                        bdate : response.response.items[item].bdate,
-                                                        year : yearBDay(response.response.items[item].bdate)
-                                                        }
-                }
 
+                let yesBDFriends = [];
                 let noBDFriend = [];
                 let beforeBD = [];
                 let afterBD = [];
 
-// Сортируем по массивам тех людей у кого указано ДР и у кого нет
-                let yesBDFriends = obMyFriends.filter(function(elem){
-                    if(elem.bdate !== undefined){
-                        return elem;
+// Сортируем на два массива людей с ДР и без
+                for(let item = 0; item < response.response.items.length; item++){
+                    if(response.response.items[item].bdate == undefined){
+                        noBDFriend[noBDFriend.length] = { first_name : response.response.items[item].first_name,
+                                                            last_name : response.response.items[item].last_name,
+                                                            photo_100 : response.response.items[item].photo_100
+                                                        }
                     } else {
-                        noBDFriend[noBDFriend.length] = elem;
+                        yesBDFriends[yesBDFriends.length] = { first_name : response.response.items[item].first_name,
+                                                            last_name : response.response.items[item].last_name,
+                                                            photo_100 : response.response.items[item].photo_100,
+                                                            bdate : response.response.items[item].bdate,
+                                                            year : yearBDay(response.response.items[item].bdate)
+                                                            }
                     }
-                }).sort(function(a, b) {
+                }
+
+                console.log(yesBDFriends, noBDFriend);
+
+// Сортируем ДР на убывание
+                let sortMyFriends = yesBDFriends.sort(function(a, b) {
 
                     let aDateArr = a.bdate.split('.');
                     let bDateArr = b.bdate.split('.');
@@ -97,7 +103,7 @@ new Promise(function(resolve){
                 });
 
 // Сортируем по массивам людей по ДР взависимости от текущей даты
-                yesBDFriends.map(function(elem){
+                sortMyFriends.forEach(function(elem){
                     let bDate = elem.bdate.split('.');
                     if(bDate[1] > myDate.month) return afterBD[afterBD.length] = elem;
                     else if(bDate[1] < myDate.month) return beforeBD[beforeBD.length] = elem;
