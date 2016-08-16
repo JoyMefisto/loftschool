@@ -73,15 +73,15 @@
 	<script id="template_el" type="text/x-handlebars-template">
 	    {{#each elems}}
 	    
-	    <div class="elem" id="{{ @index }}all" draggable="true" ondragstart="drag(event)" data-move="item" data-name="{{tolowercase first_name}} {{tolowercase last_name}}">
+	    <li class="elem" id="{{ @index }}all" draggable="true" ondragstart="drag(event)" data-move="item" data-name="{{tolowercase first_name}} {{tolowercase last_name}}">
 			<div class="img_container">
-				<img src="{{photo_50}}" alt="" class="img">
+				<img draggable="false" src="{{photo_50}}" alt="" class="img">
 			</div>
 			<div class="info">
 				<span class="info_name">{{first_name}} {{last_name}}</span>
 				<i class="fa fa-close icon" data-move="friend"></i>
 			</div>
-		</div>
+		</li>
 
 	    {{/each}}
 
@@ -91,7 +91,7 @@
 
 	    {{#each elems}}
 	    
-	    <div class="elem" id="{{ @index }}checked" draggable="true" ondragstart="drag(event)" data-move="item" data-name="{{tolowercase first_name}} {{tolowercase last_name}}">
+	    <li class="elem" id="{{ @index }}checked" draggable="true" ondragstart="drag(event)" data-move="item" data-name="{{tolowercase first_name}} {{tolowercase last_name}}">
 			<div class="img_container">
 				<img src="{{photo_50}}" alt="" class="img">
 			</div>
@@ -99,7 +99,7 @@
 				<span class="info_name">{{first_name}} {{last_name}}</span>
 				<i class="fa fa-close icon" data-move="friend"></i>
 			</div>
-		</div>
+		</li>
 
 	    {{/each}}
 

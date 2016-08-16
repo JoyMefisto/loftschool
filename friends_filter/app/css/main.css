@@ -350,21 +350,19 @@ body {
 }
 .app__main_list .elem .info {
   display: inline-block;
-  position: absolute;
-  top: -webkit-calc(50% - 11px);
-  top: calc(50% - 11px);
-  left: 60px;
-  right: 0;
+  height: 100%;
+  width: 216px;
+  vertical-align: top;
   color: #4f4f4f;
 }
 .app__main_list .elem .info_name {
   font-size: 10pt;
   font-weight: 500;
-  line-height: 10pt;
+  line-height: 40pt;
+  width: 197px;
+  display: inline-block;
 }
 .app__main_list .elem .info .icon {
-  position: absolute;
-  right: 5px;
   font-size: 14pt;
   color: #c4c4c4;
   -webkit-transform: rotate(45deg);
