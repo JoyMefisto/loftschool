@@ -5,12 +5,12 @@ function allowDrop(ev) {
 }
 
 function drag(ev) {
-    ev.dataTransfer.setData("text/html", ev.target.id);
+    ev.dataTransfer.setData("text/plain", ev.target.id);
 }
 
 function drop(ev) {
     ev.preventDefault();
-    let data = ev.dataTransfer.getData("text/html");
+    let data = ev.dataTransfer.getData("text/plain");
     let myNode = document.getElementById(data);
     let myList = document.getElementById('friends__list');
 
