@@ -1,5 +1,4 @@
-let 
-	gulp = require('gulp'),
+var gulp = require('gulp'),
 	less  = require('gulp-less'),
 	useref  = require('gulp-useref'),
 	gulpif  = require('gulp-if'),
@@ -57,7 +56,7 @@ gulp.task('js', function() {
 // modules 
 gulp.task('browserify', function() {
 
-	return browserify('./app/js/es5/appES5.js')
+	return browserify('./app/js/ES5/appES5.js')
 		.bundle()
 		.on('error', function(e) {
 			gutil.log(e);
@@ -82,8 +81,8 @@ gulp.task('clean', function () {
     .pipe(clean());
 });
 
-gulp.task('default', ['css', 'js', 'browserify', 'browser-sync'], function() {
+gulp.task('default', ['css', 'js', 'browser-sync'], function() {
   gulp.watch('app/*.html', browserSync.reload);
   gulp.watch('app/less/**/*.less', ['css']);
-  gulp.watch('app/js/**/*.js', [ 'js' , 'browserify']);
+  gulp.watch('app/js/**/*.js', [ 'js' ]);
 });
