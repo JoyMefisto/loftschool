@@ -3,25 +3,35 @@
  */
 
 let fs = require('fs');
-let url = './';
-let dirs = fs.readdirSync(url);
+let path = require('path');
+let url = path.resolve('./');
 
 
-function loopDirs(dirs) {
+
+function loopDirs(urll) {
+    let url = urll;
+    // url = d:\GitHub\loftschool\17_Nodejs\one
+
+    let dirs = fs.readdirSync(url);
+    // dirs = [ 'fileweigth.js', 'level_1' ]
 
     for(let dir of dirs){
-        let stat = fs.statSync(dir);
+
+        // url+'\\'+dir = d:\GitHub\loftschool\17_Nodejs\one\ + fileweigth.js
+        let stat = fs.statSync(url+'\\'+dir);
 
         if(stat.isDirectory()){
-            url += dir;
-            console.log(url);
-            console.log(fs.readdirSync(url));
-            loopDirs(fs.readdirSync(url));
+            console.log(dir, stat.size + " bytes");
+
+            let newUrl = path.resolve(url, dir);
+            // newUrl = d:\GitHub\loftschool\17_Nodejs\one\level_1
+
+            loopDirs(newUrl);
+
         } else if(stat.isFile()){
             console.log(dir, stat.size + " bytes");
         }
-
     }
 }
 
-loopDirs(dirs);
+loopDirs(url);
