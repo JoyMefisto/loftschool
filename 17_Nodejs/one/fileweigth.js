@@ -8,9 +8,7 @@ let url = path.resolve('./');
 
 
 
-function loopDirs(urll) {
-    let url = urll;
-    // url = d:\GitHub\loftschool\17_Nodejs\one
+function loopDirs(url) {
 
     let dirs = fs.readdirSync(url);
     // dirs = [ 'fileweigth.js', 'level_1' ]

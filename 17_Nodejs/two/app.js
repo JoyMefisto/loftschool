@@ -12,12 +12,11 @@ const typeMap = {
     ".json" : "application/json"
 };
 
-
+// let data = [];
 http.createServer(function (req, res) {
+
     let fileToRead = `.${req.url}`;
     let url = path.dirname(`.${req.url}`);
-    console.log(req.url);
-    console.log(url);
 
     if(fileToRead != '/') openPage(fileToRead);
 
@@ -30,32 +29,31 @@ http.createServer(function (req, res) {
 
         res.setHeader('Content-Type', typeMap[type] );
         res.write(content);
+
     }
 
-    res.end();
+    function loopDirs(urll) {
+        if(urll == '.') return;
 
-    loopDirs(url);
+        let url = urll;
+        let dirs = fs.readdirSync(url);
+        for(let dir of dirs){
+            let stat = fs.statSync(url+'\\'+dir);
 
-}).listen(3000);
+            if(stat.isDirectory()){
+                // data[data.length] = dir + " " + stat.size + " bytes";
+                res.write(dir + " " + stat.size + " bytes");
+                let newUrl = path.resolve(url, dir);
+                loopDirs(newUrl);
 
-
-function loopDirs(urll) {
-    if(urll == '.') return;
-
-    let url = urll;
-    let dirs = fs.readdirSync(url);
-    for(let dir of dirs){
-        let stat = fs.statSync(url+'\\'+dir);
-
-        if(stat.isDirectory()){
-            console.log(dir + " " + stat.size + " bytes");
-            let newUrl = path.resolve(url, dir);
-            loopDirs(newUrl);
-
-        } else if(stat.isFile()){
-            console.log(dir + " " + stat.size + " bytes");
+            } else if(stat.isFile()){
+                // data[data.length] = dir + " " + stat.size + " bytes";
+                res.write(dir + " " + stat.size + " bytes");
+            }
         }
     }
 
+    loopDirs(url);
+    res.end();
 
-}
+}).listen(3000);
