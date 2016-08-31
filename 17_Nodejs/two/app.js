@@ -15,45 +15,63 @@ const typeMap = {
 // let data = [];
 http.createServer(function (req, res) {
 
-    let fileToRead = `.${req.url}`;
-    let url = path.dirname(`.${req.url}`);
+    // Получаем запрошенный путь
+    let fileToRead = `./public${req.url}`;
 
-    if(fileToRead != '/') openPage(fileToRead);
+    // Если запрошенный путь не корневой, а с какими то ещё папками или файлами (index.html), то ищем его
+    if(fileToRead != './public') openPage(fileToRead);
 
     function openPage(fileToRead) {
+        // Если в файловой системе нет такого пути то 404
         if(!fs.existsSync(fileToRead)) {
             fileToRead = './public/404.html';
         }
+
+        // Чтение файла
         let content = fs.readFileSync(fileToRead, {encoding: 'utf8'});
+        // Возращает расширение файла
         let type = path.extname(fileToRead);
 
+        // Указываем заголовок
         res.setHeader('Content-Type', typeMap[type] );
+        // Отправляем файл
         res.write(content);
-
     }
 
-    function loopDirs(urll) {
-        if(urll == '.') return;
+    if(path.extname(fileToRead) === ".html"){
+        // Получаем папку этого пути
+        let url = path.dirname(fileToRead);
 
-        let url = urll;
+        loopDirs(url);
+    }
+    function loopDirs(url) {
+
         let dirs = fs.readdirSync(url);
         for(let dir of dirs){
             let stat = fs.statSync(url+'\\'+dir);
 
             if(stat.isDirectory()){
-                // data[data.length] = dir + " " + stat.size + " bytes";
+                // data[data.length] = {
+                //     "name": dir,
+                //     "size": stat.size
+                // };
                 res.write(dir + " " + stat.size + " bytes");
                 let newUrl = path.resolve(url, dir);
                 loopDirs(newUrl);
 
             } else if(stat.isFile()){
-                // data[data.length] = dir + " " + stat.size + " bytes";
+                // data[data.length] = {
+                //     "name": dir,
+                //     "size": stat.size
+                // };
                 res.write(dir + " " + stat.size + " bytes");
             }
         }
+
     }
 
-    loopDirs(url);
     res.end();
 
 }).listen(3000);
+
+
