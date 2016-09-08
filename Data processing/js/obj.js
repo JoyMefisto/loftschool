@@ -39,7 +39,7 @@ var objB = {
     })
 };
 
-console.log(deepEqual(objA, objB)); //объекты идентичны, вернет true
+console.log(deepEqual(objA, objB));
 
 function deepEqual(obj1,obj2){
 
