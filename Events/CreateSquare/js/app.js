@@ -49,7 +49,7 @@ function mDrag(myDiv){
         offsetY = e.offsetY;
     };
 
-    let mUp = (e) => {
+    let mUp = () => {
         activeElement = null;
     };
 
