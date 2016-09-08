@@ -2,7 +2,7 @@
  * Created by Mefisto on 18.07.2016.
  */
 
-// 1
+// Задани 1
 function prepend(container, newElement){
     let mycontainer = document.querySelector(container),
         secondEl = mycontainer.children[0];
@@ -12,7 +12,7 @@ function prepend(container, newElement){
 
 
 
-// 2
+// Задани 2
 function deleteTextNodes(node){
     let myNode = document.querySelector(node);
 
@@ -25,7 +25,7 @@ function deleteTextNodes(node){
 
 
 
-// 3
+// Задани 3
 function findNode(node){
     let myNode = document.querySelector(node);
 
@@ -50,7 +50,7 @@ function findNode(node){
 
 
 
-// 4
+// Задани 4
 function scanDOM(node = '*'){
     let elemAll = document.getElementsByTagName(node),
         myNode = document.querySelector(node);
