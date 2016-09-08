@@ -2,7 +2,7 @@
  * Created by Mefisto on 25.07.2016.
  */
 
-// Получаем спеисок городов через AJAX
+// Получаем список городов через AJAX
 function sendAjax(url){
     return new Promise((resolve, reject) => {
         let xhr = new XMLHttpRequest();
